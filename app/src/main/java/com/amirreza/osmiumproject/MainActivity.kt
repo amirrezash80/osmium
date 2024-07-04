@@ -1,3 +1,5 @@
+package com.amirreza.osmiumproject
+
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                         cellInfoViewModel.insert(cellInfoEntity)
                     }
                 }
-                // مشابه برای سایر انواع سلول (LTE, CDMA, WCDMA, ...)
+                // Similar handling for other cell types (LTE, CDMA, WCDMA, ...)
             }
         } else {
             // Handle the case where the permission is not granted

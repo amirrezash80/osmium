@@ -1,7 +1,10 @@
+// CellInfo.kt
+package com.amirreza.osmiumproject
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "cell_info")
 data class CellInfo(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val cellId: Int,

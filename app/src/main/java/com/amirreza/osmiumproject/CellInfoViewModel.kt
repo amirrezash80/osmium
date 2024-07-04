@@ -1,3 +1,5 @@
+package com.amirreza.osmiumproject
+
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 

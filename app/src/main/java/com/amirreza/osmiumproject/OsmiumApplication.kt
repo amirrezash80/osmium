@@ -1,3 +1,6 @@
+// OsmiumApplication.kt
+package com.amirreza.osmiumproject
+
 import android.app.Application
 import androidx.room.Room
 
