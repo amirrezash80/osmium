@@ -1,4 +1,3 @@
-// CellInfoDao.kt
 package com.amirreza.osmiumproject
 
 import androidx.room.Dao

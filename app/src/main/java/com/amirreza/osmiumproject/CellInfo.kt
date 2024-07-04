@@ -1,4 +1,3 @@
-// CellInfo.kt
 package com.amirreza.osmiumproject
 
 import androidx.room.Entity

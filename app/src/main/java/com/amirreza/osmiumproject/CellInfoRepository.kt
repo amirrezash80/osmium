@@ -1,4 +1,3 @@
-// CellInfoRepository.kt
 package com.amirreza.osmiumproject
 
 import androidx.annotation.WorkerThread
