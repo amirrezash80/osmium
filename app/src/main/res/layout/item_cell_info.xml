@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/cellIdText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cell ID: "/>
+
+    <TextView
+        android:id="@+id/lacText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LAC: "/>
+
+    <TextView
+        android:id="@+id/signalStrengthText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Signal Strength: "/>
+
+    <TextView
+        android:id="@+id/latitudeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latitude: "/>
+
+    <TextView
+        android:id="@+id/longitudeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Longitude: "/>
+</LinearLayout>

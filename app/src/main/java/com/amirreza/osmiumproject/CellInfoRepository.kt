@@ -5,11 +5,15 @@ import kotlinx.coroutines.flow.Flow
 
 class CellInfoRepository(private val cellInfoDao: CellInfoDao) {
 
-    @Suppress("RedundantSuspendModifier")
+    val allCellInfo: Flow<List<CellInfo>> = cellInfoDao.getAllCellInfo()
+
     @WorkerThread
     suspend fun insert(cellInfo: CellInfo) {
         cellInfoDao.insert(cellInfo)
     }
 
-    fun getAll(): Flow<List<CellInfo>> = cellInfoDao.getAll()
+    @WorkerThread
+    suspend fun getCellInfo(cellId: Int, lac: Int, signalStrength: Int, latitude: Double, longitude: Double): CellInfo? {
+        return cellInfoDao.getCellInfo(cellId, lac, signalStrength, latitude, longitude)
+    }
 }

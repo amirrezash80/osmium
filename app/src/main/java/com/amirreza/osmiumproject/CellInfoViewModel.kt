@@ -5,10 +5,14 @@ import kotlinx.coroutines.launch
 
 class CellInfoViewModel(private val repository: CellInfoRepository) : ViewModel() {
 
-    val allCellInfo: LiveData<List<CellInfo>> = repository.getAll().asLiveData()
+    val allCellInfo: LiveData<List<CellInfo>> = repository.allCellInfo.asLiveData()
 
     fun insert(cellInfo: CellInfo) = viewModelScope.launch {
         repository.insert(cellInfo)
+    }
+
+    suspend fun getCellInfo(cellId: Int, lac: Int, signalStrength: Int, latitude: Double, longitude: Double): CellInfo? {
+        return repository.getCellInfo(cellId, lac, signalStrength, latitude, longitude)
     }
 }
 
@@ -21,3 +25,4 @@ class CellInfoViewModelFactory(private val repository: CellInfoRepository) : Vie
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
