@@ -1,37 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:layout_margin="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp">
 
-    <TextView
-        android:id="@+id/cellIdText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cell ID: "/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/lacText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LAC: "/>
+        <TextView
+            android:id="@+id/cellIdText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cell ID: "
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/signalStrengthText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Signal Strength: "/>
+        <TextView
+            android:id="@+id/lacText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LAC: "/>
 
-    <TextView
-        android:id="@+id/latitudeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Latitude: "/>
+        <TextView
+            android:id="@+id/signalStrengthText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Signal Strength: "/>
 
-    <TextView
-        android:id="@+id/longitudeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Longitude: "/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/latitudeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latitude: "/>
+
+        <TextView
+            android:id="@+id/longitudeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Longitude: "/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

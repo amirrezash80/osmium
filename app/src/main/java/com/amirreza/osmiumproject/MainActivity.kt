@@ -1,6 +1,5 @@
 package com.amirreza.osmiumproject
 
-import UEData
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
@@ -16,10 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amirreza.osmiumproject.databinding.ActivityMainBinding
-import getCellLocation
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -30,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var locationManager: LocationManager
     private var currentLocation: Location? = null
-    private lateinit var adapter: CellInfoAdapter
     private val handler = Handler(Looper.getMainLooper())
     private val interval: Long = 10000 // 10 seconds
 
@@ -59,9 +56,15 @@ class MainActivity : AppCompatActivity() {
 
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
-        adapter = CellInfoAdapter()
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
+        val adapter = ViewPagerAdapter(this)
+        binding.viewPager.adapter = adapter
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Cell Info"
+                1 -> tab.text = "Cell Location"
+            }
+        }.attach()
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED ||
             ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -73,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         cellInfoViewModel.allCellInfo.observe(this, Observer { cellInfo ->
-            cellInfo?.let { adapter.setCellInfoList(it) }
+            // Update UI if needed
         })
     }
 
@@ -183,21 +186,6 @@ class MainActivity : AppCompatActivity() {
                         val existingCellInfo = cellInfoViewModel.getCellInfo(entity.cellId, entity.lac, entity.signalStrength, entity.latitude, entity.longitude)
                         if (existingCellInfo == null) {
                             cellInfoViewModel.insert(entity)
-
-                            // update estimation for the current cellId
-                            val cellInfoList = cellInfoViewModel.getCellInfoByCellId(entity.cellId)
-
-                            // check if cell info list is not null
-                            if (cellInfoList.value != null) {
-                                // convert list to data class UEData(val x: Double, val y: Double, val power: Double) list
-                                val ueDataList = cellInfoList.value!!.map { cellInfo ->
-                                    UEData(cellInfo.latitude, cellInfo.longitude, cellInfo.signalStrength.toDouble())
-                                }
-
-                                // call getCellLocation function
-                                val cellLocation = getCellLocation(ueDataList)
-                                Log.d("MainActivity", "Cell location: $cellLocation")
-                            }
                         } else {
                             Log.d("MainActivity", "Cell info already exists: $entity")
                         }

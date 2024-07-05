@@ -1,4 +1,6 @@
 package com.amirreza.osmiumproject
 
-class CellLocation {
-}
+data class CellLocation(
+    val location: String,
+    val cellId: String
+)

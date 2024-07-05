@@ -1,10 +1,10 @@
+import android.util.Log
 import org.apache.commons.math3.analysis.MultivariateFunction
 import org.apache.commons.math3.optim.MaxEval
+import org.apache.commons.math3.optim.PointValuePair
+import org.apache.commons.math3.optim.SimpleValueChecker
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType
 import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.CMAESOptimizer
-import org.apache.commons.math3.optim.nonlinear.scalar.ObjectiveFunction
-import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.CMAESOptimizer.PopulationSize
-import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.CMAESOptimizer.Sigma
 
 data class UEData(val x: Double, val y: Double, val power: Double)
 
@@ -23,49 +23,47 @@ fun objectiveFunction(cellX: Double, cellY: Double, ueDataList: List<UEData>, di
     }
 }
 
-fun findCellLocation(ueDataList: List<UEData>, p0: Double, n: Double): Pair<Double, Double> {
+fun findCellLocation(ueDataList: List<UEData>, p0: Double, n: Double): Pair<Double, Double>? {
+    if (ueDataList.isEmpty()) return null
+
     val distances = calculateDistances(ueDataList, p0, n)
+    Log.d("Calculation", "Distances: $distances")
 
     val function = MultivariateFunction { point ->
         objectiveFunction(point[0], point[1], ueDataList, distances)
     }
 
-    val optimizer = CMAESOptimizer(10000, 1e-9, true, 0, 10, null, false, null)
+    val optimizer = CMAESOptimizer(
+        10000, 1e-9, true, 0, 10, null, false, SimpleValueChecker(1e-9, 1e-9)
+    )
+
     val initialGuess = doubleArrayOf(0.0, 0.0)
     val sigma = doubleArrayOf(0.1, 0.1)
     val popSize = 50
 
-    val optimum = optimizer.optimize(
-        ObjectiveFunction(function),
-        GoalType.MINIMIZE,
-        PopulationSize(popSize),
-        Sigma(sigma),
-        MaxEval(10000),
-        org.apache.commons.math3.optim.InitialGuess(initialGuess)
-    )
+    return try {
+        val optimum: PointValuePair = optimizer.optimize(
+            MaxEval(10000),
+            org.apache.commons.math3.optim.nonlinear.scalar.ObjectiveFunction(function),
+            GoalType.MINIMIZE,
+            CMAESOptimizer.PopulationSize(popSize),
+            CMAESOptimizer.Sigma(sigma),
+            org.apache.commons.math3.optim.InitialGuess(initialGuess)
+        )
 
-    val solution = optimum.point
-    return Pair(solution[0], solution[1])
+        val solution = optimum.point
+        Log.d("Calculation", "Solution: $solution")
+        Pair(solution[0], solution[1])
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
 }
 
-fun getCellLocation(ueDataList: List<UEData>): Pair<Double, Double> {
+fun getCellLocation(ueDataList: List<UEData>): Pair<Double, Double>? {
     val p0 = -30.0 // Example value for P0
     val n = 2.0   // Example value for path loss exponent
 
-    val cellLocation = findCellLocation(ueDataList, p0, n)
-
-    return cellLocation
+    Log.d("Calculation", "UEDataList: $ueDataList")
+    return findCellLocation(ueDataList, p0, n)
 }
-
-//fun main() {
-//    val ueDataList = listOf(
-//        UEData(1.0, 1.0, -50.0),
-//        UEData(2.0, 2.0, -60.0),
-//        UEData(3.0, 3.0, -70.0)
-//    )
-//    val p0 = -30.0 // Example value for P0
-//    val n = 2.0   // Example value for path loss exponent
-//
-//    val cellLocation = findCellLocation(ueDataList, p0, n)
-//    println("Estimated cell location: (${cellLocation.first}, ${cellLocation.second})")
-//}
