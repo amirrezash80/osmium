@@ -11,6 +11,11 @@ class CellInfoViewModel(private val repository: CellInfoRepository) : ViewModel(
         repository.insert(cellInfo)
     }
 
+    // Function to get all records with a specific cellId
+    fun getCellInfoByCellId(cellId: Int): LiveData<List<CellInfo>> {
+        return repository.getCellInfoByCellId(cellId).asLiveData()
+    }
+
     suspend fun getCellInfo(cellId: Int, lac: Int, signalStrength: Int, latitude: Double, longitude: Double): CellInfo? {
         return repository.getCellInfo(cellId, lac, signalStrength, latitude, longitude)
     }

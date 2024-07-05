@@ -16,4 +16,10 @@ class CellInfoRepository(private val cellInfoDao: CellInfoDao) {
     suspend fun getCellInfo(cellId: Int, lac: Int, signalStrength: Int, latitude: Double, longitude: Double): CellInfo? {
         return cellInfoDao.getCellInfo(cellId, lac, signalStrength, latitude, longitude)
     }
+
+    // Function to get all records with a specific cellId
+    @WorkerThread
+    fun getCellInfoByCellId(cellId: Int): Flow<List<CellInfo>> {
+        return cellInfoDao.getCellInfoByCellId(cellId)
+    }
 }

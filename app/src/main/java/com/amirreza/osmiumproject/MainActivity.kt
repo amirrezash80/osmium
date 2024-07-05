@@ -1,5 +1,6 @@
 package com.amirreza.osmiumproject
 
+import UEData
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
@@ -15,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amirreza.osmiumproject.databinding.ActivityMainBinding
+import getCellLocation
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -180,6 +183,21 @@ class MainActivity : AppCompatActivity() {
                         val existingCellInfo = cellInfoViewModel.getCellInfo(entity.cellId, entity.lac, entity.signalStrength, entity.latitude, entity.longitude)
                         if (existingCellInfo == null) {
                             cellInfoViewModel.insert(entity)
+
+                            // update estimation for the current cellId
+                            val cellInfoList = cellInfoViewModel.getCellInfoByCellId(entity.cellId)
+
+                            // check if cell info list is not null
+                            if (cellInfoList.value != null) {
+                                // convert list to data class UEData(val x: Double, val y: Double, val power: Double) list
+                                val ueDataList = cellInfoList.value!!.map { cellInfo ->
+                                    UEData(cellInfo.latitude, cellInfo.longitude, cellInfo.signalStrength.toDouble())
+                                }
+
+                                // call getCellLocation function
+                                val cellLocation = getCellLocation(ueDataList)
+                                Log.d("MainActivity", "Cell location: $cellLocation")
+                            }
                         } else {
                             Log.d("MainActivity", "Cell info already exists: $entity")
                         }

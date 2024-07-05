@@ -48,15 +48,24 @@ fun findCellLocation(ueDataList: List<UEData>, p0: Double, n: Double): Pair<Doub
     return Pair(solution[0], solution[1])
 }
 
-fun main() {
-    val ueDataList = listOf(
-        UEData(1.0, 1.0, -50.0),
-        UEData(2.0, 2.0, -60.0),
-        UEData(3.0, 3.0, -70.0)
-    )
+fun getCellLocation(ueDataList: List<UEData>): Pair<Double, Double> {
     val p0 = -30.0 // Example value for P0
     val n = 2.0   // Example value for path loss exponent
 
     val cellLocation = findCellLocation(ueDataList, p0, n)
-    println("Estimated cell location: (${cellLocation.first}, ${cellLocation.second})")
+
+    return cellLocation
 }
+
+//fun main() {
+//    val ueDataList = listOf(
+//        UEData(1.0, 1.0, -50.0),
+//        UEData(2.0, 2.0, -60.0),
+//        UEData(3.0, 3.0, -70.0)
+//    )
+//    val p0 = -30.0 // Example value for P0
+//    val n = 2.0   // Example value for path loss exponent
+//
+//    val cellLocation = findCellLocation(ueDataList, p0, n)
+//    println("Estimated cell location: (${cellLocation.first}, ${cellLocation.second})")
+//}
