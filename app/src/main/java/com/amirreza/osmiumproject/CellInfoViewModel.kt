@@ -30,4 +30,3 @@ class CellInfoViewModelFactory(private val repository: CellInfoRepository) : Vie
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-

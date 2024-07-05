@@ -40,6 +40,8 @@ fun findCellLocation(ueDataList: List<UEData>, p0: Double, n: Double): Pair<Doub
     val initialGuess = doubleArrayOf(0.0, 0.0)
     val sigma = doubleArrayOf(0.1, 0.1)
     val popSize = 50
+    val meanX = ueDataList.map { it.x }.average()
+    val meanY = ueDataList.map { it.y }.average()
 
     return try {
         val optimum: PointValuePair = optimizer.optimize(
@@ -53,10 +55,15 @@ fun findCellLocation(ueDataList: List<UEData>, p0: Double, n: Double): Pair<Doub
 
         val solution = optimum.point
         Log.d("Calculation", "Solution: $solution")
-        Pair(solution[0], solution[1])
+
+        if (solution != null && solution.isNotEmpty()) {
+            Pair(solution[0], solution[1])
+        } else {
+            Pair(meanX, meanY)
+        }
     } catch (e: Exception) {
         e.printStackTrace()
-        null
+        Pair(meanX, meanY)
     }
 }
 
