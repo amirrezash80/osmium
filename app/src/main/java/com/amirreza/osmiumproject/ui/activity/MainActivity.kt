@@ -1,4 +1,4 @@
-package com.amirreza.osmiumproject
+package com.amirreza.osmiumproject.ui.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -15,8 +15,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.amirreza.osmiumproject.data.OsmiumApplication
 import com.amirreza.osmiumproject.databinding.ActivityMainBinding
+import com.amirreza.osmiumproject.ui.model.CellInfo
+import com.amirreza.osmiumproject.ui.viewmodel.CellInfoViewModel
+import com.amirreza.osmiumproject.ui.viewmodel.CellInfoViewModelFactory
+import com.amirreza.osmiumproject.ui.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

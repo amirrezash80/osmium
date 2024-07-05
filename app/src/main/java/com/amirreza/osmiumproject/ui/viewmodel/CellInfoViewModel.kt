@@ -1,6 +1,8 @@
-package com.amirreza.osmiumproject
+package com.amirreza.osmiumproject.ui.viewmodel
 
 import androidx.lifecycle.*
+import com.amirreza.osmiumproject.data.repository.CellInfoRepository
+import com.amirreza.osmiumproject.ui.model.CellInfo
 import kotlinx.coroutines.launch
 
 class CellInfoViewModel(private val repository: CellInfoRepository) : ViewModel() {

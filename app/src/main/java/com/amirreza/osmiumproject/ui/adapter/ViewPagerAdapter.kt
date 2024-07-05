@@ -1,8 +1,10 @@
-package com.amirreza.osmiumproject
+package com.amirreza.osmiumproject.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.amirreza.osmiumproject.ui.fragment.CellInfoFragment
+import com.amirreza.osmiumproject.ui.fragment.CellLocationFragment
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int = 2

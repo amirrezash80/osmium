@@ -1,9 +1,10 @@
-package com.amirreza.osmiumproject
+package com.amirreza.osmiumproject.data.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.amirreza.osmiumproject.ui.model.CellInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao

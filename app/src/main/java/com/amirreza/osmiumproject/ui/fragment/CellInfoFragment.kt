@@ -1,4 +1,4 @@
-package com.amirreza.osmiumproject
+package com.amirreza.osmiumproject.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.amirreza.osmiumproject.data.OsmiumApplication
 import com.amirreza.osmiumproject.databinding.FragmentCellInfoBinding
+import com.amirreza.osmiumproject.ui.viewmodel.CellInfoViewModel
+import com.amirreza.osmiumproject.ui.viewmodel.CellInfoViewModelFactory
+import com.amirreza.osmiumproject.ui.adapter.CellInfoAdapter
 
 class CellInfoFragment : Fragment() {
     private var _binding: FragmentCellInfoBinding? = null

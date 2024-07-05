@@ -1,4 +1,4 @@
-//import androidx.room.Database
+package com.amirreza.osmiumproject.data.database//import androidx.room.Database
 //import androidx.room.RoomDatabase
 //
 //@Database(entities = [CellInfo::class], version = 1)

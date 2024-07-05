@@ -68,8 +68,8 @@ fun findCellLocation(ueDataList: List<UEData>, p0: Double, n: Double): Pair<Doub
 }
 
 fun getCellLocation(ueDataList: List<UEData>): Pair<Double, Double>? {
-    val p0 = -30.0 // Example value for P0
-    val n = 2.0   // Example value for path loss exponent
+    val p0 = -30.0
+    val n = 2.0
 
     Log.d("Calculation", "UEDataList: $ueDataList")
     return findCellLocation(ueDataList, p0, n)

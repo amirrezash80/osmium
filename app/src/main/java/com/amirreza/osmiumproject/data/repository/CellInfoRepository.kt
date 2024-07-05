@@ -1,6 +1,8 @@
-package com.amirreza.osmiumproject
+package com.amirreza.osmiumproject.data.repository
 
 import androidx.annotation.WorkerThread
+import com.amirreza.osmiumproject.ui.model.CellInfo
+import com.amirreza.osmiumproject.data.database.CellInfoDao
 import kotlinx.coroutines.flow.Flow
 
 class CellInfoRepository(private val cellInfoDao: CellInfoDao) {

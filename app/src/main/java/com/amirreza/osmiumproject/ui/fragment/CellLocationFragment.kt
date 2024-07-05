@@ -1,4 +1,4 @@
-package com.amirreza.osmiumproject
+package com.amirreza.osmiumproject.ui.fragment
 
 import UEData
 import android.os.Bundle
@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.amirreza.osmiumproject.data.OsmiumApplication
 import com.amirreza.osmiumproject.databinding.FragmentCellLocationBinding
+import com.amirreza.osmiumproject.ui.viewmodel.CellInfoViewModel
+import com.amirreza.osmiumproject.ui.viewmodel.CellInfoViewModelFactory
 import getCellLocation
 
 class CellLocationFragment : Fragment() {

@@ -1,4 +1,4 @@
-//import android.view.LayoutInflater
+package com.amirreza.osmiumproject.ui.adapter//import android.view.LayoutInflater
 //import android.view.View
 //import android.view.ViewGroup
 //import android.widget.ImageView

@@ -1,10 +1,10 @@
-package com.amirreza.osmiumproject
+package com.amirreza.osmiumproject.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.amirreza.osmiumproject.databinding.ItemCellInfoBinding
+import com.amirreza.osmiumproject.ui.model.CellInfo
 
 class CellInfoAdapter : RecyclerView.Adapter<CellInfoAdapter.CellInfoViewHolder>() {
 
